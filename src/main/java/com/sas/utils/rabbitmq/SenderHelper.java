@@ -1,13 +1,11 @@
-package com.sas.rabbitmq;
+package com.sas.utils.rabbitmq;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.sas.rabbitmq.utils.RabbitmqUtil;
+import com.sas.utils.rabbitmq.utils.RabbitmqUtil;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -15,18 +13,16 @@ import java.util.concurrent.Executors;
 
 /**
  * mq消息发送助手
+ *
  * @author liuyongping
  * @version 1.0
  * @created at 2019/7/22 10:56
  */
-@Component
 public class SenderHelper {
-
 
 	private ExecutorService service = Executors.newFixedThreadPool(10);
 	private Logger logger = Logger.getLogger(SenderHelper.class);
 
-	@Autowired
 	RabbitmqUtil rabbitmqUtil;
 
 	//持久队列(队列将在服务器重启后继续存在)
@@ -36,7 +32,8 @@ public class SenderHelper {
 	//声明一个autoDelete队列(服务器将在不再使用时删除它)
 	boolean autoDelete = false;
 
-	public SenderHelper() {
+	public SenderHelper(String host, String port, String virtualhost, String username, String password) {
+		rabbitmqUtil = new RabbitmqUtil(host, port, virtualhost, password, username);
 	}
 
 	/**

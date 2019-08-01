@@ -1,4 +1,4 @@
-package com.sas.rabbitmq.connection;
+package com.sas.utils.rabbitmq.connection;
 
 
 import java.io.IOException;

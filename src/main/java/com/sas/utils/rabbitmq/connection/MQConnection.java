@@ -1,11 +1,10 @@
-package com.sas.rabbitmq.connection;
-
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
-
+package com.sas.utils.rabbitmq.connection;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 /**
  * mq普通连接

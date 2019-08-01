@@ -1,12 +1,10 @@
-package com.sas.rabbitmq;
+package com.sas.utils.rabbitmq;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.sas.rabbitmq.utils.RabbitmqUtil;
+import com.sas.utils.rabbitmq.utils.RabbitmqUtil;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -19,12 +17,13 @@ import java.util.concurrent.Executors;
  * @version 1.0
  * @created at 2019/7/22 10:56
  */
-@Component
 public class ReceiveHelper {
 
-	@Autowired
 	RabbitmqUtil rabbitmqUtil;
 
+	public ReceiveHelper(String host, String port, String virtualHost, String username, String password){
+		rabbitmqUtil=new RabbitmqUtil(host,port,virtualHost,username,password);
+	}
 	//持久队列(队列将在服务器重启后继续存在)
 	boolean durable = true;
 	//声明一个独占队列(仅限于此连接)
@@ -40,7 +39,7 @@ public class ReceiveHelper {
 	/**
 	 * 向MQ接收JSON数据 (点对点模式)
 	 */
-	public void receiveBySimple(BaseConsumer consumer) {
+	public void receiveBySimple(BaseConsumerable consumer) {
 		String queueName = consumer.getQueueName();
 		try {
 
@@ -62,7 +61,7 @@ public class ReceiveHelper {
 	 *
 	 * @param arguments 队列的其他属性(构造参数)
 	 */
-	public void receiveBySimple(BaseConsumer consumer, Map<String, Object> arguments) {
+	public void receiveBySimple(BaseConsumerable consumer, Map<String, Object> arguments) {
 
 		try {
 			Connection connection = rabbitmqUtil.getConnection();
@@ -90,7 +89,7 @@ public class ReceiveHelper {
 	 * 扇形交换机是最基本的交换机类型，它所能做的事情非常简单———广播消息。扇形交换机会把能接收到的消息全部接收给绑定在自己身上
 	 * 的队列。因为广播不需要“思考”，所以扇形交换机处理消息的速度也是所有的交换机类型里面最快的。
 	 */
-	public void receiveByFanout(BaseConsumer consumer) {
+	public void receiveByFanout(BaseConsumerable consumer) {
 
 		String exchangeName = consumer.getExchangeName();
 		try {
@@ -123,7 +122,7 @@ public class ReceiveHelper {
 	 *
 	 * @param arguments 队列的其他属性(构造参数)
 	 */
-	public void receiveByFanout(BaseConsumer consumer, Map<String, Object> arguments) {
+	public void receiveByFanout(BaseConsumerable consumer, Map<String, Object> arguments) {
 		String exchangeName = consumer.getExchangeName();
 		try {
 			Connection connection = rabbitmqUtil.getConnection();
@@ -144,10 +143,9 @@ public class ReceiveHelper {
 	 * <p>
 	 * 多个生产者，多个消费者模式
 	 */
-	public void receiveByWork(BaseConsumer consumer) {
+	public void receiveByWork(BaseConsumerable consumer) {
 		String queueName = consumer.getQueueName();
 		try {
-
 			Connection connection = rabbitmqUtil.getConnection();
 			Channel channel = rabbitmqUtil.createChannel(connection, queueName, durable,
 					exclusive, autoDelete, null);
@@ -168,7 +166,7 @@ public class ReceiveHelper {
 	 *
 	 * @param arguments 队列的其他属性(构造参数)
 	 */
-	public void receiveByWork(BaseConsumer consumer, Map<String, Object> arguments) {
+	public void receiveByWork(BaseConsumerable consumer, Map<String, Object> arguments) {
 		String queueName = consumer.getQueueName();
 		try {
 
@@ -192,7 +190,7 @@ public class ReceiveHelper {
 	 * 此时满足键的队列都能收到消息，不满足的直接被丢弃。
 	 * direct
 	 */
-	public void receiveByRouting(BaseConsumer consumer) {
+	public void receiveByRouting(BaseConsumerable consumer) {
 
 		String[] routingKeys = consumer.getRoutingKeys();
 		String exchangeName = consumer.getExchangeName();
@@ -224,7 +222,7 @@ public class ReceiveHelper {
 	 * 以定义任何数量的标识符，上限为255个字节。 #井号可以替代零个或更多的单词，只要能模糊匹配上就能将消息映射到队列中。当一个
 	 * 队列的绑定键为#的时候，这个队列将会无视消息的路由键，接收所有的消息
 	 */
-	public void receiveByTopic(BaseConsumer consumer) {
+	public void receiveByTopic(BaseConsumerable consumer) {
 		String[] routingKeys = consumer.getRoutingKeys();
 		String exchangeName = consumer.getExchangeName();
 		if (routingKeys == null || routingKeys.length <= 0) {

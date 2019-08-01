@@ -1,19 +1,20 @@
-package com.sas.rabbitmq.consumer.impl;
+package com.sas.utils.rabbitmq.consumer.impl;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
-import com.sas.rabbitmq.BaseConsumer;
+import com.sas.utils.rabbitmq.BaseConsumerable;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 /**
  * @author liuyongping
  * @version 1.0
  * @created at 2019/7/24 20:04
  */
-public class MyConsumer implements BaseConsumer {
+public class BaseConsumer implements BaseConsumerable {
 	private DefaultConsumer consumer;
 	private Channel channel;
 	private String queueName;
@@ -42,21 +43,36 @@ public class MyConsumer implements BaseConsumer {
 		DefaultConsumer defaultConsumer = new DefaultConsumer(channel) {
 			@Override
 			public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-				String message = new String(body, "UTF-8");
-				System.out.println(message);
-				channel.basicAck(envelope.getDeliveryTag(), false);
-				//				if (message.contains(":3")){
-				//					// requeue：重新入队列，true: 重新放入队列
-				//					// channel.basicReject(envelope.getDeliveryTag(), true);
-				//					//重新投递 指定投递的消息是否允许当前消费者消费。
-				//					channel.basicRecover(true);
-				//
-				//				} else {
-				//				channel.basicAck(envelope.getDeliveryTag(), false);
-				//				}
+				Boolean isok = DoHandle(consumerTag, envelope, properties, body);
+				if (isok) {
+					DoHandleSuccess(consumerTag, envelope, properties, body);
+				} else {
+					DoHandleFaild(consumerTag, envelope, properties, body);
+				}
+				if (!isAutoAck()) {
+					channel.basicAck(envelope.getDeliveryTag(), false);
+				}
 			}
 		};
 		this.setConsumer(defaultConsumer);
+	}
+
+	@Override
+	public void DoHandleSuccess(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) {
+		System.out.println("消息执行成功");
+	}
+
+	@Override
+	public void DoHandleFaild(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) {
+		System.out.println("消息执行失败");
+	}
+
+	@Override
+	public Boolean DoHandle(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) {
+		String message = null;
+		message = new String(body, Charset.defaultCharset());
+		System.out.println(message);
+		return true;
 	}
 
 	@Override

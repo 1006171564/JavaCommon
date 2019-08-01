@@ -1,18 +1,16 @@
-package com.sas.rabbitmq.connection;
+package com.sas.utils.rabbitmq.connection;
 
 import com.rabbitmq.client.Connection;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.Vector;
 
 /**
  * mq连接池
+ *
  * @author liuyongping
  * @version 1.0
  * @created at 2019/7/22 10:52
  */
-@Component
 public class ConnectionWrapper {
 
 	private final int INIT_SIZE = 4; //连接池初始化大小
@@ -21,25 +19,33 @@ public class ConnectionWrapper {
 
 	private String driver;
 
-	@Autowired
-	RabbitmqConnectParams rabbitmqConnectParams;
+	//mq连接参数信息
+	private String host;
+	private String port;
+	private String password;
+	private String username;
+	private String virtualhost;
 
 	private long activeTime = 5000;
 
 	private Vector<MQConnection> connectPool = null;//存放数据库连接的向量
 
-	public ConnectionWrapper() {
+	public ConnectionWrapper(String host, String port, String password, String username, String virtualhost) {
+		this.host = host;
+		this.port = port;
+		this.password = password;
+		this.username = username;
+		this.virtualhost = virtualhost;
 	}
 
 	private void initPool() {
+
 		if (null == connectPool) {
 			//创建数据库连接池
 			connectPool = new Vector<MQConnection>(INIT_SIZE);
 			//循环创建数据库连接
 			for (int i = 0; i < INIT_SIZE; i++) {
-				MQConnection db = new MQConnection(rabbitmqConnectParams.url, rabbitmqConnectParams.username,
-						rabbitmqConnectParams.password, rabbitmqConnectParams.port,
-						rabbitmqConnectParams.virtualHost);
+				MQConnection db = new MQConnection(host, username, password, port, virtualhost);
 				System.out.println("创建了MQConnection连接");
 				connectPool.add(db);
 			}
@@ -48,6 +54,7 @@ public class ConnectionWrapper {
 
 	/**
 	 * 创建自动销毁连接
+	 *
 	 * @return
 	 */
 	public MQConnection createNewConectionTimer() {
@@ -55,9 +62,7 @@ public class ConnectionWrapper {
 		initPool();
 		//此方法的作用是：当获取连接的时候，如果连接不够了，才会执行这个方法创建连接
 		synchronized (connectPool) {
-			MQConnection db = new MQConnectionTimer(driver, rabbitmqConnectParams.url, rabbitmqConnectParams.username,
-					rabbitmqConnectParams.password, rabbitmqConnectParams.port,
-					rabbitmqConnectParams.virtualHost, activeTime);
+			MQConnection db = new MQConnectionTimer(driver, host, username, password, port, virtualhost, activeTime);
 			System.out.println("创建了MQConnectionTimer连接");
 			connectPool.add(db);
 			return db;
@@ -66,10 +71,10 @@ public class ConnectionWrapper {
 
 	/**
 	 * 获取连接
+	 *
 	 * @return
 	 */
 	public Connection getConnection() {
-
 		initPool();
 		System.out.println("此时连接池中还有的连接数： " + connectPool.size());
 		synchronized (connectPool) {

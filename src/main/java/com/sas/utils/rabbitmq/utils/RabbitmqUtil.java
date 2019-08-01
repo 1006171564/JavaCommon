@@ -1,17 +1,17 @@
-package com.sas.rabbitmq.utils;
+package com.sas.utils.rabbitmq.utils;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.sas.rabbitmq.BaseConsumer;
-import com.sas.rabbitmq.connection.ConnectionWrapper;
+import com.sas.utils.rabbitmq.BaseConsumerable;
+import com.sas.utils.rabbitmq.connection.ConnectionWrapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * mq 工具类
@@ -20,12 +20,16 @@ import java.util.Map;
  * @version 1.0
  * @created at 2019/7/22 10:52
  */
-@Component
 public class RabbitmqUtil {
-	@Autowired
-	private ConnectionWrapper factory;//注入连接池对象
+
+	//mq连接池对象
+	private ConnectionWrapper factory;
 
 	private Logger logger = Logger.getLogger(RabbitmqUtil.class);
+
+	public RabbitmqUtil(String host, String port, String virtualhost, String username, String password) {
+		factory = new ConnectionWrapper(host, port, password, username, virtualhost);
+	}
 
 	/**
 	 * 绑定路由键
@@ -145,56 +149,6 @@ public class RabbitmqUtil {
 		logger.info("通道启动初始化成功");
 		return channel;
 	}
-//	/**
-//	 * 发送消息
-//	 * 生产者批量确认机制
-//	 * @param channel 连接通道
-//	 * @param exchangeName 交换机名称
-//	 * @param routingKey 路由键
-//	 * @param props        消息路由头等的其他属性
-//	 * @param messages
-//	 * @throws IOException
-//	 */
-//	public void sendMessage(Channel channel, String exchangeName, String routingKey, AMQP.BasicProperties props,
-//							String[] messages) throws IOException {
-//		long batchCount = messages.length;
-//		long msgCount =0;
-//
-//		//生产者异步确认机制 （事务机制，普通confirm，批量confirm，异步confirm）可以实现生产者确认  异步效率最高
-//		SortedSet<Long> confirmSet = new TreeSet<>();
-//		channel.confirmSelect();
-//		channel.addConfirmListener(new ConfirmListener() {
-//			@Override
-//			public void handleAck(long deliveryTag, boolean multiple) throws IOException {
-//				System.out.println("Ack,SeqNo：" + deliveryTag + ",multiple：" + multiple);
-//				if (multiple) {
-//					confirmSet.headSet(deliveryTag - 1).clear();
-//				} else {
-//					confirmSet.remove(deliveryTag);
-//				}
-//			}
-//
-//			@Override
-//			public void handleNack(long deliveryTag, boolean multiple) throws IOException {
-//				System.out.println("Nack,SeqNo：" + deliveryTag + ",multiple：" + multiple);
-//				if (multiple) {
-//					confirmSet.headSet(deliveryTag - 1).clear();
-//				} else {
-//					confirmSet.remove(deliveryTag);
-//				}
-//				// 注意这里需要添加处理消息重发的场景
-//			}
-//		});
-//		String message;
-//		// 发送消息
-//		while (msgCount < batchCount) {
-//			message = messages[(int) msgCount];
-//			long nextSeqNo = channel.getNextPublishSeqNo();
-//			channel.basicPublish(exchangeName, routingKey, props, message.getBytes());
-//			confirmSet.add(nextSeqNo);
-//			msgCount = nextSeqNo;
-//		}
-//	}
 
 	/**
 	 * 发送消息
@@ -222,7 +176,7 @@ public class RabbitmqUtil {
 	 * @param consumer 消息接收者
 	 * @throws IOException
 	 */
-	public void reveiveMessage(BaseConsumer consumer) throws IOException {
+	public void reveiveMessage(BaseConsumerable consumer) throws IOException {
 		consumer.getChannel().basicConsume(consumer.getQueueName(), consumer.isAutoAck(), consumer.getConsumer());
 	}
 
@@ -233,9 +187,17 @@ public class RabbitmqUtil {
 	public Connection getConnection() throws Exception {
 
 		logger.info("获取ＭＱ服务器连接信息");
-		if (factory == null) {
-			factory = new ConnectionWrapper();
-		}
+		// Properties properties = new Properties();
+		// 使用InPutStream流读取properties文件
+		// InputStream in = RabbitmqUtil.class.getClassLoader().getResourceAsStream("mq-config.properties");
+		// properties.load(in);
+		// String host = properties.getProperty("spring.rabbitmq.host");
+		// String port = properties.getProperty("spring.rabbitmq.port");
+		// String password = properties.getProperty("spring.rabbitmq.password");
+		// String username = properties.getProperty("spring.rabbitmq.username");
+		// String virtualhost = properties.getProperty("spring.rabbitmq.virtualHost");
+		// return factory.getConnection(host, port, virtualhost, username, password);
+
 		return factory.getConnection();
 	}
 
