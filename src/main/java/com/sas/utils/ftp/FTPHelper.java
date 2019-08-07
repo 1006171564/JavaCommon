@@ -65,11 +65,11 @@ public class FTPHelper {
 
 	}
 
-	public String[] getFileList(String filedir)
+	public String[] getFileList(String fileDir)
 			throws IOException {
 		ftpClient.enterLocalPassiveMode();
 
-		FTPFile[] files = ftpClient.listFiles(filedir);
+		FTPFile[] files = ftpClient.listFiles(fileDir);
 
 		String[] sfiles = null;
 		if (files != null) {
@@ -214,8 +214,8 @@ public class FTPHelper {
 		UploadStatus result;
 		// 对远程目录的处理
 		String remoteFileName = remote;
-		if (remote.contains("/")) {
-			remoteFileName = remote.substring(remote.lastIndexOf("/") + 1);
+		if (remote.contains(File.separator)) {
+			remoteFileName = remote.substring(remote.lastIndexOf(File.separator) + 1);
 			// 创建服务器远程目录结构，创建失败直接返回
 			if (CreateDirecroty(remote, ftpClient) == UploadStatus.Create_Directory_Fail) {
 				return UploadStatus.Create_Directory_Fail;
@@ -273,18 +273,18 @@ public class FTPHelper {
 	public UploadStatus CreateDirecroty(String remote, FTPClient ftpClient)
 			throws IOException {
 		UploadStatus status = UploadStatus.Create_Directory_Success;
-		String directory = remote.substring(0, remote.lastIndexOf("/") + 1);
-		if (!directory.equalsIgnoreCase("/")
+		String directory = remote.substring(0, remote.lastIndexOf(File.separator) + 1);
+		if (!directory.equalsIgnoreCase(File.separator)
 				&& !ftpClient.changeWorkingDirectory(new String(directory.getBytes(cherset), charset_name))) {
 			// 如果远程目录不存在，则递归创建远程服务器目录
 			int start = 0;
 			int end = 0;
-			if (directory.startsWith("/")) {
+			if (directory.startsWith(File.separator)) {
 				start = 1;
 			} else {
 				start = 0;
 			}
-			end = directory.indexOf("/", start);
+			end = directory.indexOf(File.separator, start);
 			while (true) {
 				String subDirectory = new String(remote.substring(start, end).getBytes(cherset), charset_name);
 				if (!ftpClient.changeWorkingDirectory(subDirectory)) {
@@ -297,7 +297,7 @@ public class FTPHelper {
 				}
 
 				start = end + 1;
-				end = directory.indexOf("/", start);
+				end = directory.indexOf(File.separator, start);
 
 				// 检查所有目录是否创建完毕
 				if (end <= start) {

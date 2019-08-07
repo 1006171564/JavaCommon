@@ -1,50 +1,66 @@
-2019-07-31 09:51:22,882 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(236) | 获取ＭＱ服务器连接信息
-2019-07-31 09:52:46,938 INFO [main] com.sas.utils.rabbitmq.ReceiveHelper.receiveBySimple(55) | 消费者向队列 [Test_Simple] 接收消息失败
-2019-07-31 09:53:06,109 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(236) | 获取ＭＱ服务器连接信息
-2019-07-31 09:53:06,245 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(95) | 通道启动初始化成功
-2019-07-31 09:53:56,360 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(236) | 获取ＭＱ服务器连接信息
-2019-07-31 09:53:56,526 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(95) | 通道启动初始化成功
-2019-07-31 09:53:56,541 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(56) | 生产者启动,当前模式为[[点对点模式]]
-2019-07-31 09:53:56,542 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(57) | 生产者向队列 [Test_Simple] 发送消息成功
-2019-07-31 10:14:04,038 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(236) | 获取ＭＱ服务器连接信息
-2019-07-31 10:14:04,049 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(64) | 生产者向队列 [Test_Simple] 发送消息失败
-2019-07-31 10:18:56,853 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(238) | 获取ＭＱ服务器连接信息
-2019-07-31 10:18:56,860 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(63) | 生产者向队列 [Test_Simple] 发送消息失败
-2019-07-31 10:57:59,144 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 10:58:57,646 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 10:59:42,497 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:03:46,193 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(242) | 获取ＭＱ服务器连接信息
-2019-07-31 11:07:38,833 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:08:54,548 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:08:54,672 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
-2019-07-31 11:08:54,685 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(55) | 生产者启动,当前模式为[[点对点模式]]
-2019-07-31 11:08:54,686 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(56) | 生产者向队列 [Test_Simple] 发送消息成功
-2019-07-31 11:16:24,109 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:16:24,390 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
-2019-07-31 11:16:24,408 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(53) | 生产者启动,当前模式为[[点对点模式]]
-2019-07-31 11:16:24,408 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(54) | 生产者向队列 [Test_Simple] 发送消息成功
-2019-07-31 11:17:03,419 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:17:03,693 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
-2019-07-31 11:17:52,909 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:17:53,224 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
-2019-07-31 11:25:06,735 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:25:22,251 INFO [main] com.sas.utils.rabbitmq.ReceiveHelper.receiveBySimple(54) | 消费者向队列 [Test_Simple] 接收消息失败
-2019-07-31 11:25:28,928 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:25:29,363 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
-2019-07-31 11:29:50,020 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(239) | 获取ＭＱ服务器连接信息
-2019-07-31 11:29:50,356 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(77) | 通道启动初始化成功
-2019-07-31 11:29:50,359 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByFanout(118) | 生产者启动,当前模式为[[广播模式]]
-2019-07-31 11:29:50,360 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByFanout(119) | 生产者向交换机 [sendByFanout] 发送消息成功
-2019-07-31 16:25:16,951 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(190) | 获取ＭＱ服务器连接信息
-2019-07-31 16:25:22,740 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(61) | 生产者向队列 [Test_Simple] 发送消息失败
-2019-07-31 16:33:41,519 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(190) | 获取ＭＱ服务器连接信息
-2019-07-31 16:35:19,582 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(61) | 生产者向队列 [Test_Simple] 发送消息失败
-2019-07-31 16:35:31,661 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(190) | 获取ＭＱ服务器连接信息
-2019-07-31 16:37:11,222 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(61) | 生产者向队列 [Test_Simple] 发送消息失败
-2019-07-31 17:01:25,348 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(192) | 获取ＭＱ服务器连接信息
-2019-07-31 17:35:02,551 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
-2019-07-31 17:35:33,957 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(57) | 生产者向队列 [Test_Simple] 发送消息失败
-2019-07-31 17:35:43,544 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
-2019-07-31 17:35:43,719 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
-2019-07-31 17:35:43,733 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(53) | 生产者启动,当前模式为[[点对点模式]]
-2019-07-31 17:35:43,734 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(54) | 生产者向队列 [Test_Simple] 发送消息成功
+2019-08-07 13:35:21,424 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:35:21,768 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:35:22,788 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:35:22,860 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:35:22,867 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:35:22,901 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:35:22,925 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:35:22,957 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:35:22,967 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(186) | 生产者启动,当前模式为[[work模式]]
+2019-08-07 13:35:22,967 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(187) | 生产者向交换机 [sendByWork] 发送消息成功
+2019-08-07 13:35:22,985 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:35:23,023 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:35:23,023 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(215) | 生产者启动,当前模式为[[work模式]]
+2019-08-07 13:35:23,023 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(216) | 生产者向交换机 [sendByWork] 发送消息成功
+2019-08-07 13:35:23,036 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:35:23,068 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(77) | 通道启动初始化成功
+2019-08-07 13:35:23,070 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByFanout(118) | 生产者启动,当前模式为[[广播模式]]
+2019-08-07 13:35:23,070 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByFanout(119) | 生产者向交换机 [sendByFanout] 发送消息成功
+2019-08-07 13:35:23,079 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:35:23,108 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:35:23,113 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(53) | 生产者启动,当前模式为[[点对点模式]]
+2019-08-07 13:35:23,113 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(54) | 生产者向队列 [Test_Simple] 发送消息成功
+2019-08-07 13:36:28,895 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:36:29,127 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:36:30,142 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:36:30,177 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:36:30,184 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:36:30,219 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:36:30,247 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:36:30,304 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:36:30,333 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(186) | 生产者启动,当前模式为[[work模式]]
+2019-08-07 13:36:30,335 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(187) | 生产者向交换机 [sendByWork] 发送消息成功
+2019-08-07 13:36:30,412 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:36:30,493 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:36:30,494 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(215) | 生产者启动,当前模式为[[work模式]]
+2019-08-07 13:36:30,494 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(216) | 生产者向交换机 [sendByWork] 发送消息成功
+2019-08-07 13:36:30,504 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:36:30,540 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(77) | 通道启动初始化成功
+2019-08-07 13:36:30,542 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByFanout(118) | 生产者启动,当前模式为[[广播模式]]
+2019-08-07 13:36:30,542 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByFanout(119) | 生产者向交换机 [sendByFanout] 发送消息成功
+2019-08-07 13:36:30,551 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:36:30,581 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:36:30,595 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(53) | 生产者启动,当前模式为[[点对点模式]]
+2019-08-07 13:36:30,595 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(54) | 生产者向队列 [Test_Simple] 发送消息成功
+2019-08-07 13:45:54,181 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:45:54,395 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:45:55,405 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:45:55,439 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:45:55,447 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:45:55,486 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:45:55,513 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:45:55,563 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:45:55,577 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(186) | 生产者启动,当前模式为[[work模式]]
+2019-08-07 13:45:55,578 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(187) | 生产者向交换机 [sendByWork] 发送消息成功
+2019-08-07 13:45:55,646 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:45:55,713 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:45:55,714 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(215) | 生产者启动,当前模式为[[work模式]]
+2019-08-07 13:45:55,714 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByWork(216) | 生产者向交换机 [sendByWork] 发送消息成功
+2019-08-07 13:45:55,726 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:45:55,763 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(77) | 通道启动初始化成功
+2019-08-07 13:45:55,764 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByFanout(118) | 生产者启动,当前模式为[[广播模式]]
+2019-08-07 13:45:55,764 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendByFanout(119) | 生产者向交换机 [sendByFanout] 发送消息成功
+2019-08-07 13:45:55,772 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.getConnection(189) | 获取ＭＱ服务器连接信息
+2019-08-07 13:45:55,815 INFO [main] com.sas.utils.rabbitmq.utils.RabbitmqUtil.createChannel(98) | 通道启动初始化成功
+2019-08-07 13:45:55,821 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(53) | 生产者启动,当前模式为[[点对点模式]]
+2019-08-07 13:45:55,822 INFO [main] com.sas.utils.rabbitmq.SenderHelper.sendBySimple(54) | 生产者向队列 [Test_Simple] 发送消息成功
