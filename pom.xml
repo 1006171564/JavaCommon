@@ -11,7 +11,7 @@
     <groupId>com.sas.utils</groupId>
     <artifactId>utils</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>rabbitmq</name>
+    <name>common</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -73,6 +73,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>5.1.8.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>9.0.14</version>
         </dependency>
 
     </dependencies>
