@@ -1,11 +1,5 @@
 package com.sas.ftp;
 
-/**
- * @author liuyongping
- * @version 1.0
- * @created at 2019/7/30 10:34
- */
-
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -24,13 +18,11 @@ import java.nio.charset.Charset;
 public class FTPHelper {
     private static final Logger logger = Logger.getLogger(FTPHelper.class);
 
-    public FTPClient ftpClient = new FTPClient();
-
+    private FTPClient ftpClient = new FTPClient();
     private String cherset = Charset.defaultCharset().displayName();
     private String charset_name = "iso-8859-1";
 
     public FTPHelper() {
-
         // 设置将过程中使用到的命令输出到控制台
         // this.ftpClient.addProtocolCommandListener(new
         // PrintCommandListener(new PrintWriter(System.out)));
@@ -44,7 +36,6 @@ public class FTPHelper {
      * @param username 用户名
      * @param password 密码
      * @return 是否连接成功
-     * @throws IOException
      */
     public boolean connect(String hostname, int port, String username, String password)
             throws Exception {
@@ -88,7 +79,6 @@ public class FTPHelper {
      * @param remoteFullName 远程文件全路径
      * @param localFullName  本地文件全路径
      * @return 上传的状态
-     * @throws IOException
      */
     public DownloadStatus download(String remoteFullName, String localFullName)
             throws IOException {
@@ -107,11 +97,12 @@ public class FTPHelper {
             return DownloadStatus.Remote_File_Noexist;
         }
 
-        long lRemoteSize = files[0].getSize();
-        File f = new File(localFullName);
+        FTPFile remoteFile = files[0];
+        long lRemoteSize = remoteFile.getSize();
+        File file = new File(localFullName);
         // 本地存在文件，进行断点下载
-        if (f.exists()) {
-            long localSize = f.length();
+        if (file.exists()) {
+            long localSize = file.length();
             // 判断本地文件大小是否大于远程文件大小
             if (localSize > lRemoteSize) {
                 logger.info("本地文件大于远程文件，下载中止");
@@ -121,36 +112,8 @@ public class FTPHelper {
                 logger.info("本地文件存在");
                 return DownloadStatus.Local_File_exist;
             }
-
-            // 进行断点续传，并记录状态
-            FileOutputStream out = new FileOutputStream(f, true);
-            // 找出本地已经接收了多少
-            ftpClient.setRestartOffset(localSize);
-            InputStream in = ftpClient.retrieveFileStream(new String(remoteFullName.getBytes(cherset), charset_name));
-            try {
-                byte[] bytes = new byte[1024];
-                // 总的进度
-                long step = lRemoteSize / 100;
-                long process = localSize / step;
-                int c;
-                while ((c = in.read(bytes)) != -1) {
-                    out.write(bytes, 0, c);
-                    localSize += c;
-                    long nowProcess = localSize / step;
-                    if (nowProcess > process) {
-                        process = nowProcess;
-                        if (process % 10 == 0)
-                            logger.info("下载进度：" + process);
-                        // TODO 更新文件下载进度,值存放在process变量中
-                    }
-                }
-            } catch (Exception e) {
-            } finally {
-                if (in != null)
-                    in.close();
-                if (out != null)
-                    out.close();
-            }
+            //下载传输
+            transferFile(remoteFile, file);
 
             // 确认是否全部下载完毕
             boolean isDo = ftpClient.completePendingCommand();
@@ -160,32 +123,10 @@ public class FTPHelper {
                 result = DownloadStatus.Download_From_Break_Failed;
             }
         } else {
-            OutputStream out = new FileOutputStream(f);
-            InputStream in = ftpClient.retrieveFileStream(new String(remoteFullName.getBytes(cherset), charset_name));
-            try {
-                byte[] bytes = new byte[1024];
-                long step = lRemoteSize / 100;
-                long process = 0;
-                long localSize = 0L;
-                int c;
-                while ((c = in.read(bytes)) != -1) {
-                    out.write(bytes, 0, c);
-                    localSize += c;
-                    long nowProcess = localSize / step;
-                    if (nowProcess > process) {
-                        process = nowProcess;
-                        if (process % 10 == 0)
-                            logger.info("下载进度：" + process);
-                        // TODO 更新文件下载进度,值存放在process变量中
-                    }
-                }
-            } catch (Exception e) {
-            } finally {
-                if (in != null)
-                    in.close();
-                if (out != null)
-                    out.close();
-            }
+
+            //下载传输
+            transferFile(remoteFile, file);
+
             boolean upNewStatus = ftpClient.completePendingCommand();
             if (upNewStatus) {
                 result = DownloadStatus.Download_New_Success;
@@ -197,12 +138,52 @@ public class FTPHelper {
     }
 
     /**
+     * 远程文件下载
+     *
+     * @param ftpFile   远程文件
+     * @param localFile 本地文件
+     */
+    private void transferFile(FTPFile ftpFile, File localFile) throws IOException {
+        long lRemoteSize = ftpFile.getSize();
+        String remoteFullName = ftpFile.getName();
+        long localSize = localFile.length();
+        // 进行断点续传，并记录状态
+        FileOutputStream out = new FileOutputStream(localFile, true);
+        // 找出本地已经接收了多少
+        ftpClient.setRestartOffset(localSize);
+        InputStream in = ftpClient.retrieveFileStream(new String(remoteFullName.getBytes(cherset), charset_name));
+        try {
+            byte[] bytes = new byte[1024];
+            // 总的进度
+            long step = lRemoteSize / 100;
+            long process = localSize / step;
+            int c;
+            while ((c = in.read(bytes)) != -1) {
+                out.write(bytes, 0, c);
+                localSize += c;
+                long nowProcess = localSize / step;
+                if (nowProcess > process) {
+                    process = nowProcess;
+                    if (process % 10 == 0)
+                        logger.info("下载进度：" + process);
+                    // TODO 更新文件下载进度,值存放在process变量中
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null)
+                in.close();
+            out.close();
+        }
+    }
+
+    /**
      * 上传文件到FTP服务器，支持断点续传
      *
      * @param local  本地文件名称，绝对路径
      * @param remote 远程文件路径，使用/home/directory1/subdirectory/file.ext 按照Linux上的路径指定方式，支持多级目录嵌套，支持递归创建不存在的目录结构
      * @return 上传结果
-     * @throws IOException
      */
     public UploadStatus upload(String local, String remote)
             throws IOException {
@@ -223,7 +204,7 @@ public class FTPHelper {
         if (remote.contains(File.separator)) {
             remoteFileName = remote.substring(remote.lastIndexOf(File.separator) + 1);
             // 创建服务器远程目录结构，创建失败直接返回
-            if (CreateDirecroty(remote, ftpClient) == UploadStatus.Create_Directory_Fail) {
+            if (createDirecroty(remote, ftpClient) == UploadStatus.Create_Directory_Fail) {
                 return UploadStatus.Create_Directory_Fail;
             }
         }
@@ -259,7 +240,6 @@ public class FTPHelper {
     /**
      * 断开与远程服务器的连接
      *
-     * @throws IOException
      */
     public void disconnect()
             throws IOException {
@@ -274,23 +254,21 @@ public class FTPHelper {
      * @param remote    远程服务器文件绝对路径
      * @param ftpClient FTPClient对象
      * @return 目录创建是否成功
-     * @throws IOException
      */
-    public UploadStatus CreateDirecroty(String remote, FTPClient ftpClient)
+    public UploadStatus createDirecroty(String remote, FTPClient ftpClient)
             throws IOException {
         UploadStatus status = UploadStatus.Create_Directory_Success;
         String directory = remote.substring(0, remote.lastIndexOf(File.separator) + 1);
         if (!directory.equalsIgnoreCase(File.separator)
                 && !ftpClient.changeWorkingDirectory(new String(directory.getBytes(cherset), charset_name))) {
             // 如果远程目录不存在，则递归创建远程服务器目录
-            int start = 0;
-            int end = 0;
+            int start;
             if (directory.startsWith(File.separator)) {
                 start = 1;
             } else {
                 start = 0;
             }
-            end = directory.indexOf(File.separator, start);
+            int end = directory.indexOf(File.separator, start);
             while (true) {
                 String subDirectory = new String(remote.substring(start, end).getBytes(cherset), charset_name);
                 if (!ftpClient.changeWorkingDirectory(subDirectory)) {
