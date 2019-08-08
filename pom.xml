@@ -69,11 +69,7 @@
             <version>1.7.21</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>5.1.8.RELEASE</version>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
@@ -82,55 +78,6 @@
 
     </dependencies>
 
-    <!--<build>-->
-        <!--<plugins>-->
-
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-surefire-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<skip>true</skip>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-
-
-            <!--&lt;!&ndash;spring mvn 插件 可运行jar包&ndash;&gt;-->
-            <!--&lt;!&ndash;<plugin>&ndash;&gt;-->
-            <!--&lt;!&ndash;<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
-            <!--&lt;!&ndash;<artifactId>spring-boot-maven-plugin</artifactId>&ndash;&gt;-->
-            <!--&lt;!&ndash;</plugin>&ndash;&gt;-->
-
-
-            <!--&lt;!&ndash;普通mvn插件 可被引用的jar&ndash;&gt;-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-jar-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<excludes>-->
-                        <!--<exclude>**/*.properties</exclude>-->
-                        <!--<exclude>**/*.yml</exclude>-->
-                    <!--</excludes>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-source-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<attach>true</attach>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>compile</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>jar</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-
-
-        <!--</plugins>-->
-    <!--</build>-->
     <!-- nexus-releases nexus-snapshots与settings.xml中server下的id对应 -->
     <distributionManagement>
         <repository>

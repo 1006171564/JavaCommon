@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
+ * 文件操作类
  * @author liuyongping
  * @version 1.0
  * @created at 2019/8/7 13:33
